@@ -43,6 +43,8 @@ def main():
                 print("Game over!")
                 sys.exit()
                 
+       
+                
         # for shots
         shots.update(dt)
         for shot in shots:
@@ -51,6 +53,14 @@ def main():
         for draw in drawable:
             draw.draw(screen)
 
+
+        # check collisions if r1 + r2 <= circle1.raidus + circle2.radius
+        for asteriod_bullet in asteroids:
+            for shot in shots:
+                if(asteriod_bullet.check_collisions(shot)):
+                    asteriod_bullet.split()
+                    shot.kill()
+                
         pygame.display.flip()
         dt = clock.tick(60) / 1000
         
